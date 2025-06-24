@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Life Copilot Onboarding</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h1, h2, p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="screen" id="screen1">
+            <h1>👋 Merhaba! AI Life Copilot'a Hoş Geldin!</h1>
+            <p>Günlük hayatında ihtiyaç duyduğun her anda sana destek olabilmem için bazı bilgilere ihtiyacım olacak. 💡 Birlikte hayatını daha düzenli bir hale getirebilir, günlük rutinler oluşturabilir ya da merak ettiğin herhangi bir konuda en büyük yardımcın olabilirim 😉 Hadi başlayalım!</p>
+            <button onclick="nextScreen('screen2')">Başla 🚀</button>
+        </div>
+
+        <div class="screen hidden" id="screen2">
+            <h2>📛 İsmini öğrenebilir miyim?</h2>
+            <input type="text" placeholder="İsmin">
+            <button onclick="nextScreen('screen3')">Devam ➡️</button>
+        </div>
+
+        <div class="screen hidden" id="screen3">
+            <h2>🎯 Şu sıralar en çok neye odaklanmak istiyorsun?</h2>
+            <label><input type="checkbox"> 📅 Günlük rutinler oluşturmak</label>
+            <label><input type="checkbox"> 😵‍💫 Stresimi ve kaygımı azaltmak</label>
+            <label><input type="checkbox"> 🏋️‍♀️🍎 Spor ve beslenme alışkanlığı kazanmak</label>
+            <label><input type="checkbox"> 💖 Özel hayatımı düzene sokmak</label>
+            <label><input type="checkbox"> 💼 Daha odaklı ve üretken olmak</label>
+            <label><input type="checkbox"> 🧠 Kendimi daha iyi tanımak</label>
+            <button onclick="nextScreen('screen4')">Devam ➡️</button>
+        </div>
+
+        <div class="screen hidden" id="screen4">
+            <h2>⏰ Genelde sabahları kaçta uyanırsın?</h2>
+            <p>Bu bilgiyi sana sabahları bildirim göndermek ve gününü planlamak için kullanacağım. 📲 Bu bilgiyi dilediğin zaman uygulama içerisinden değiştirebilirsin.</p>
+            <input type="time" value="08:00">
+            <button onclick="nextScreenWithPermission('screen5')">Devam ➡️</button>
+        </div>
+
+        <div class="screen hidden" id="screen5">
+            <h2>🙋‍♀️ Cinsiyetini öğrenebilir miyim?</h2>
+            <p>Cinsiyet bilgin, sana kişiselleştirilmiş sonuçlar verebilmem için kritik olacak. Dilersen tabii ki pas geçebilirsin 😉</p>
+            <label><input type="radio" name="gender"> Kadın</label>
+            <label><input type="radio" name="gender"> Erkek</label>
+            <label><input type="radio" name="gender"> Belirtmek istemiyorum</label>
+            <button onclick="nextScreen('screen6')">Tamamla ✅</button>
+        </div>
+
+        <div class="screen hidden" id="screen6">
+            <h2>🎉 Onboarding tamamlandı!</h2>
+            <p>Artık senin için özel öneriler sunmaya hazırım. 💬 Her sabah birlikte plan yapacağız, seni dinleyeceğim ve sana destek olacağım.<br><br>Hazırsan başlayalım 💪</p>
+            <button onclick="alert('🚀 Ana ekrana geçiş simülasyonu!')">Uygulamaya Geç →</button>
+        </div>
+    </div>
+
+    <script>
+        function nextScreen(id) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function nextScreenWithPermission(id) {
+            if (Notification && Notification.permission !== "granted") {
+                Notification.requestPermission().then(() => {
+                    nextScreen(id);
+                });
+            } else {
+                nextScreen(id);
+            }
+        }
+    </script>
+</body>
+</html>
